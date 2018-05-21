@@ -1,0 +1,9 @@
+model/scraper/images/
+model/model.h5
+app/model.h5
+*/.ipynb_checkpoints
+*/__pycache__
+*.pyc
+.vscode
+app/reverser/*/migrations/
+model.h5
