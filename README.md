@@ -29,3 +29,4 @@ Cannot put the URL publicly for the dataset, but you can email me if you are int
 
 # TODO
 - Compare with a regular CNN.
+- Frontend for API.
