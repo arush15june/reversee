@@ -23,3 +23,6 @@ Cannot put the URL publicly for the dataset, but you can email me if you are int
 - You can use the `test.ipynb` for testing against images in the dataset
 - Use the Flask app (app/application.py) to access the trained model (model.h5) using the REST API (/api/match)
 ```curl -X PUT -F 'image=@file.jpg' http://localhost:5000/api/match``` 
+
+# Attributions 
+- https://github.com/harveyslash/Facial-Similarity-with-Siamese-Networks-in-Pytorch
