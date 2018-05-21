@@ -26,3 +26,6 @@ Cannot put the URL publicly for the dataset, but you can email me if you are int
 
 # Attributions 
 - https://github.com/harveyslash/Facial-Similarity-with-Siamese-Networks-in-Pytorch
+
+# TODO
+- Compare with a regular CNN.
