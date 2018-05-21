@@ -1,4 +1,4 @@
-# Reverse Image
+# ReverSEE
 
 CNN to recommend similar T-shirt's from the database
 
