@@ -24,6 +24,7 @@ Cannot put the URL publicly for the dataset, but you can email me if you are int
 - Use the Flask app (app/application.py) to access the trained model (model.h5) using the REST API (/api/match)
 ```curl -X PUT -F 'image=@file.jpg' http://localhost:5000/api/match``` 
 
+Using the REST API is not practical at the moment, because with a dataset of 10000 images it takes 100 seconds to find the top 10 matches.
 # Attributions 
 - https://github.com/harveyslash/Facial-Similarity-with-Siamese-Networks-in-Pytorch
 
