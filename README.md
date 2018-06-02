@@ -3,7 +3,7 @@
 CNN to recommend similar T-shirt's from the database
 
 # Dataset
-Cannot put the URL publicly for the dataset, but you can email me if you are interested. 
+Cannot put the URL for the dataset publicly, but you can email me if you are interested. 
 
 - `model/scraper/scraper.py` to scrape the images
 - `model/scraper/resize.py` to crop them to 130x150 images
@@ -21,9 +21,9 @@ Cannot put the URL publicly for the dataset, but you can email me if you are int
 # Using the model
 - You can use the `QueryTest.ipynb` notebook for testing against images in the folder
 - You can use the `test.ipynb` for testing against images in the dataset
-- Use the Flask app (app/application.py) to access the trained model (model.h5) using the REST API (/api/match)
+- Use the Flask app (`app/application.py`) to access the trained model (`model.h5`) using the REST API (`/api/match`)
 
-```curl -X PUT -F 'image=@file.jpg' http://localhost:5000/api/match``` 
+    ```curl -X PUT -F 'image=@file.jpg' http://localhost:5000/api/match``` 
 
 Using the REST API is not practical at the moment, because with a dataset of 10000 images it takes 100 seconds to find the top 10 matches.
 # Attributions 
