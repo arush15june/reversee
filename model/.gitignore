@@ -1,0 +1,14 @@
+model/scraper/images/
+model/model.h5
+model/model_cnn.h5
+model/model_cnn_full.h5
+app/model.h5
+app/model_cnn_full.h5
+*/classes.csv
+*/classes_full.csv
+*/.ipynb_checkpoints
+*/__pycache__
+*.pyc
+.vscode
+app/reverser/*/migrations/
+model.h5

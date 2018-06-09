@@ -2,7 +2,7 @@ import os
 from PIL import Image
 
 IMAGES_DIR = 'images'
-OUTPUT_DIR = os.path.join(IMAGES_DIR, 'resized')
+OUTPUT_DIR = os.path.join(IMAGES_DIR, 'resized_full')
 
 if not os.path.exists(OUTPUT_DIR):
     os.makedirs(OUTPUT_DIR)
@@ -10,8 +10,9 @@ if not os.path.exists(OUTPUT_DIR):
 ALL_IMAGES = os.listdir(IMAGES_DIR)
 
 def resizeImage(image):
-    return image.resize((180, 240), Image.ANTIALIAS).crop((20, 50, 150, 200))
-
+    # return image.resize((180, 240), Image.ANTIALIAS).crop((20, 50, 150, 200))
+    return image.resize((130, 150), Image.ANTIALIAS)
+    
 for file_name in ALL_IMAGES:
     if 'jpg' not in file_name:
         continue

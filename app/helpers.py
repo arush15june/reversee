@@ -2,7 +2,7 @@ import os
 from PIL import Image
 import torchvision.datasets as datasets
 from torchvision import transforms
-from model import QueryModel, QueryDataset
+from model import QueryModel, QueryDataset, CNNQueryModel, ConvNetDataset
 
 class ModelPredictor():
     def __init__(self, model_path, images_dir):
@@ -36,3 +36,24 @@ class ModelPredictor():
 
         return top10
 
+class CNNModelPredictor():
+    def __init__(self, model_path, classes='classes.csv'):
+        self.model = CNNQueryModel(model_path, classes)
+
+    @staticmethod
+    def getImage(image_file):
+        image_file.seek(0)
+        image = Image.open(image_file)
+        return image
+
+    def _predict(self, image):
+        """ image: PIL Image """
+        return self.model.predict(image)
+
+    def getMatches(self, image_file):
+        """ image_file: File Name/BytesIO Object """
+        image = self.getImage(image_file)
+
+        top10 = self._predict(image)
+
+        return top10

@@ -7,15 +7,17 @@ Barcode Reader API
 import sys
 from io import BytesIO
 
-from flask import Flask, request, make_response, jsonify
+from flask import Flask, request, make_response, jsonify, Response
 from flask_restful import Resource, Api, reqparse, abort
 from flask_cors import CORS
 from werkzeug.datastructures import FileStorage
 
-from helpers import ModelPredictor
+from helpers import ModelPredictor, CNNModelPredictor
 
 DEFAULT_MODEL_PATH = "model.h5"
-DEFAULT_TRAINING_DIR = "../model/scraper/images/training/"
+DEFAULT_CNN_MODEL_PATH = "model_cnn_full.h5"
+DEFAULT_IMAGES_DIR = "../model/scraper/images/"
+DEFAULT_CLASSES_FILE = "classes_full.csv"
 
 
 """
@@ -50,7 +52,7 @@ class Reverser(Resource):
     put_parser = reqparse.RequestParser(argument_class=FileStorageArgument)
     put_parser.add_argument('image', required=True, type=FileStorage, location='files')
     
-    predictor = ModelPredictor(DEFAULT_MODEL_PATH, DEFAULT_TRAINING_DIR)    
+    predictor = ModelPredictor(DEFAULT_MODEL_PATH, DEFAULT_IMAGES_DIR+"training")    
 
     @staticmethod
     def verify_extension(image):
@@ -78,13 +80,17 @@ class Reverser(Resource):
             abort(400, message="Invalid Input")
 
         top10 = self.predictor.getMatches(image_file)
+        data_dict = self.DFtoDict(top10)
+        
+        print(data_dict)
 
-        response = make_response(self.DFtoDict(top10))
-            
-        return response
-
+        return make_response(jsonify(data_dict))
+    
+class ReverserCNN(Reverser):
+    predictor = CNNModelPredictor(DEFAULT_CNN_MODEL_PATH, DEFAULT_CLASSES_FILE)
 
 api.add_resource(Reverser, "/api/match")
+api.add_resource(ReverserCNN, "/api/matchcnn")
 
 if __name__ == '__main__':
     app.run(debug=True)
