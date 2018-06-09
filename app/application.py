@@ -81,8 +81,6 @@ class Reverser(Resource):
 
         top10 = self.predictor.getMatches(image_file)
         data_dict = self.DFtoDict(top10)
-        
-        print(data_dict)
 
         return make_response(jsonify(data_dict))
     
