@@ -44,8 +44,12 @@ Cannot put the URL for the dataset publicly, but you can email me if you are int
 
 Using the REST API with the Siamese Network is not practical at the moment, because with a dataset of 10000 images it takes 100 seconds to find the top 10 matches.
 
+# Frontend
+- A frontend is present inside `/docs` to access the REST API (thanks @kautukkundan)
+- Also hosted on `arush15june.github.io/reversee`
+
 # Attributions 
 - https://github.com/harveyslash/Facial-Similarity-with-Siamese-Networks-in-Pytorch
 
 # TODO
-- Frontend for API.
+- Siamese Network and CNN Comparison
