@@ -7,7 +7,7 @@ Barcode Reader API
 import sys
 from io import BytesIO
 
-from flask import Flask, request, make_response, jsonify, Response
+from flask import Flask, request, make_response, jsonify, Response, send_from_directory
 from flask_restful import Resource, Api, reqparse, abort
 from flask_cors import CORS
 from werkzeug.datastructures import FileStorage
@@ -19,7 +19,6 @@ DEFAULT_CNN_MODEL_PATH = "model_cnn_full.h5"
 DEFAULT_IMAGES_DIR = "../model/scraper/images/"
 DEFAULT_CLASSES_FILE = "classes_full.csv"
 
-
 """
     Flask Config
 """
@@ -29,8 +28,14 @@ ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png']
 app = Flask(__name__)
 app.config.from_object(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/images/*": {"origins": "*"}})
 
 api = Api(app)
+
+""" To use an actual web server for serving static content """
+@app.route('/images/<path:path>')
+def send_static_images(path):
+    return send_from_directory(DEFAULT_IMAGES_DIR, path)
 
 class FileStorageArgument(reqparse.Argument):
     """This argument class for flask-restful will be used in
@@ -56,6 +61,7 @@ class Reverser(Resource):
 
     @staticmethod
     def verify_extension(image):
+
         extension = image.filename.rsplit('.', 1)[1].lower()
         if '.' in image.filename and not extension in app.config['ALLOWED_EXTENSIONS']:
             return False
