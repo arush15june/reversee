@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+  <!-- External Styles -->
+  <link rel="stylesheet" type="text/css" href="./styles.css">
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed:500,600,700,800,900" rel="stylesheet">
+
+
+
+
+  <title>Reversee</title>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="top-header">
+      <div class="row">
+        <div class="col">
+          <div class="row title">
+            ReverSEE
+          </div>
+          <div class="row description">
+            CNN to recommend similar T-shirt's from the database
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="image-uploader">
+      <div class="row">
+        <div class="col-5 col-md-3 image-upload">
+          <form id="upload-image" method="post" enctype="multipart/form-data">
+            <div class="card justify-content-center" id="uploader">
+              +
+            </div>
+          </form>
+        </div>
+        <div class="col-7 upload-info justify-content-center">
+          <input type="file" id="image-up" class="image-up" name="image-up" onchange="sendImage(this);">
+          <p>Upload The image of the T-shirt to get matching T-shirts!</p>
+          <button class="btn btn-outline-warning" id="button">UPLOAD AND GO!</button>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+
+
+    <div class="results">
+      <div class="spinner">
+        <div class="loader"></div>
+      </div>
+      <h2>MATCHING RESULTS</h2>
+      <br><br>
+      <div class="row responser-wrapper"></div>
+
+      <br><br><br><br>
+    </div>
+
+
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  <!-- Controller -->
+  <script type="text/javascript" src="./controller.js"></script>
+</body>
+</html>
