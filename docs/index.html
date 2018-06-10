@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+  <!-- External Styles -->
+  <link rel="stylesheet" type="text/css" href="./styles.css">
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed:500,600,700,800,900" rel="stylesheet">
+
+  <style>
+    body {
+      background: #3B7CD1;
+      font-family: "Encode Sans Condensed"
+    }
+
+    .top-header {
+      color: white;
+      padding: 3vh
+    }
+
+    .title {
+      font-size: 10vh;
+      font-weight: 800;
+    }
+    .description {
+      font-size: 3vh;
+      font-weight: 500;
+    }
+
+    .image-upload {
+      height: 38vh;
+      padding: 2vh;
+    }
+
+    .image-upload .card {
+      height: 36vh;
+      font-size: 10vh;
+      color : #566877;
+      text-align: center;
+      display:flex;
+      flex-direction:column;
+      cursor: pointer;
+    }
+
+    .ok {
+      height: 100%;
+    }
+
+    .upload-info {
+      height: 40vh;
+      padding: 2vh;
+      color: white;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .upload-info .btn {
+      max-width: 80%;
+    }
+
+    .results .spinner {
+      width: 100%;
+      margin: auto;
+    }
+
+    .results h2 {
+      text-align: center;
+      color: white;
+    }
+
+    .response-image {
+      text-align: center;
+      background: white;
+      border:solid 1px #566877;
+      padding: 2vh;
+    }
+
+    /*.image-up {
+      opacity: 0.0; 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      bottom: 0; 
+      right: 0; 
+      width: 100%; 
+      height:100%;
+      cursor: pointer;
+    }*/
+
+    /*.results {
+      visibility: hidden;
+    }*/
+
+    .loader {
+      visibility: hidden;
+      margin: auto;
+        border: 5px solid #f3f3f3; /* Light grey */
+        border-top: 5px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 0.5s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+  </style>
+
+  <title>Reversee</title>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="top-header">
+      <div class="row">
+        <div class="col">
+          <div class="row title">
+            ReverSEE
+          </div>
+          <div class="row description">
+            CNN to recommend similar T-shirt's from the database
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="image-uploader">
+      <div class="row">
+        <div class="col-5 col-md-3 image-upload">
+          <form id="upload-image" method="post" enctype="multipart/form-data">
+            <div class="card justify-content-center" id="uploader">
+              +
+            </div>
+          </form>
+        </div>
+        <div class="col-7 upload-info justify-content-center">
+          <input type="file" id="image-up" class="image-up" name="image-up" onchange="sendImage(this);">
+          <p>Upload The image of the T-shirt to get matching T-shirts!</p>
+          <button class="btn btn-outline-warning" id="button">UPLOAD AND GO!</button>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+
+
+    <div class="results">
+      <div class="spinner">
+        <div class="loader"></div>
+      </div>
+      <h2>MATCHING RESULTS</h2>
+      <br><br>
+      <div class="row responser-wrapper"></div>
+
+      <br><br><br><br>
+    </div>
+
+
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  <!-- Controller -->
+  <script>
+
+    let URL = "http://localhost:5000";
+    let SIAMESE_MATCH_URI = "/api/match"
+    let CNN_MATCH_URI = "/api/matchcnn"
+
+    //Give the path of the image collection folder here
+    let IMAGE_URI = '/images';
+
+    //argument => complete results object
+    const appendResults = (data) => {
+      console.log(data['results'].length)
+      $('.responser-wrapper').innerHTML = ''
+      data['results'].map((result) => {
+        console.log(result)
+        $('.responser-wrapper').append( 
+          '<div class="col-md-3 col-6 response-image">'
+          +'<img width=\'200\' height=\'300\' src="'+ URL+IMAGE_URI + '/' + result.file +'">'
+          +'<p>'+result.loss+'</p>'
+          +'</div>');
+      });
+    };
+    
+    const sendFile = (file) => {
+      let data = new FormData()
+      data.append('image', file)
+
+      fetch(URL+CNN_MATCH_URI, { // Your POST endpoint
+      method: 'PUT',
+      body: data // This is your file object
+      }).then(
+        response => response.json() // if the response is a JSON object
+      ).then(
+        success => appendResults(success) // Handle the success response object
+      ).catch(
+        error => console.log(error) // Handle the error response object
+      );
+    };
+
+    const sendImage = (input) => {
+
+      if (input.files && input.files[0]) {
+        sendFile(input.files[0])
+      }
+    };
+  </script>
+  <!-- <script type="text/javascript" src="./controller.js"></script> -->
+</body>
+</html>
