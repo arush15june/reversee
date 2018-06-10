@@ -18,18 +18,22 @@ body {
 }
 
 .image-upload {
-	height: 40vh;
+	height: 38vh;
 	padding: 2vh;
 }
 
 .image-upload .card {
-	height: 100%;
+	height: 36vh;
 	font-size: 10vh;
 	color : #566877;
 	text-align: center;
 	display:flex;
 	flex-direction:column;
 	cursor: pointer;
+}
+
+.ok {
+	height: 100%;
 }
 
 .upload-info {
@@ -61,6 +65,22 @@ body {
 	padding: 2vh;
 }
 
+/*.image-up {
+	opacity: 0.0; 
+	position: absolute; 
+	top: 0; 
+	left: 0; 
+	bottom: 0; 
+	right: 0; 
+	width: 100%; 
+	height:100%;
+	cursor: pointer;
+}*/
+
+/*.results {
+	visibility: hidden;
+}*/
+
 .loader {
 	visibility: hidden;
 	margin: auto;
@@ -69,7 +89,7 @@ body {
     border-radius: 50%;
     width: 30px;
     height: 30px;
-    animation: spin 1s linear infinite;
+    animation: spin 0.5s linear infinite;
 }
 
 @keyframes spin {
