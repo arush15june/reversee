@@ -197,9 +197,23 @@
           +'</div>');
       });
     };
+
+    const updateSelectedImage = (src) => {
+      console.log(src)
+      let imageHTML = "<img style='max-height:200px' class = 'img-responsive' src='"+src+"'>"
+      $("#uploader").html(imageHTML)
+    }
     
     const sendFile = (file) => {
-      let data = new FormData()
+
+      let reader =  new FileReader()
+      reader.onload = (e) => {
+        console.log(e.target.result)
+        updateSelectedImage(e.target.result)
+      } 
+      reader.readAsDataURL(file)
+
+      let data = new FormData() // FormData to pack the image in
       data.append('image', file)
 
       fetch(URL+CNN_MATCH_URI, { // Your POST endpoint
