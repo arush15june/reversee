@@ -10,7 +10,7 @@ Cannot put the URL for the dataset publicly, but you can email me if you are int
 
 # Training the model
 
-- It uses PyTorch with CUDA to train. If you don't have a GPU, please replace all the `.cuda()` variables.
+- It uses PyTorch with CUDA to train. If you don't have a GPU, replace all the `.cuda()` variables.
 
 - There are two different models, A regular CNN and a Siamese Network Model.
 - To use the Regular CNN
