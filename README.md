@@ -2,6 +2,8 @@
 
 CNN to recommend similar T-shirt's from the database
 
+![ReverSEE](https://i.imgur.com/2IKKQpz.jpg)
+
 # Dataset
 Cannot put the URL for the dataset publicly, but you can email me if you are interested. 
 
