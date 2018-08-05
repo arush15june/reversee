@@ -2,6 +2,8 @@
 
 CNN to recommend similar T-shirt's from the database
 
+[https://arush15june.github.io/project/Building-ReverSEE/](Blogpost)
+
 ![ReverSEE](https://i.imgur.com/2IKKQpz.jpg)
 
 # Dataset
