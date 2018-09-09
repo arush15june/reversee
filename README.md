@@ -2,7 +2,7 @@
 
 CNN to recommend similar T-shirt's from the database
 
-[https://arush15june.github.io/project/Building-ReverSEE/](Blogpost)
+[https://arush15june.github.io/project/Building-ReverSEE/](https://arush15june.github.io/project/Building-ReverSEE/)
 
 ![ReverSEE](https://i.imgur.com/2IKKQpz.jpg)
 
